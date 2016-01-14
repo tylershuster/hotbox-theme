@@ -18,10 +18,10 @@
 
       <h2>Get the highest quality products!</h2>
 
-      <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/pipe.png" alt="An X kind of Pipe" title="'For tobacco only'">
-      <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/jar.png" alt="An organic nug jug" title="Put your weed in here">
-      <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/lighter_bro.png" alt="A 'Lighter Bro' multi-tool">
-      <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/black_label.png" alt="Black Label cleaner">
+      <figure><img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/pipe.png" alt="An X kind of Pipe" title="'For tobacco only'"></figure>
+      <figure><img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/jar.png" alt="An organic nug jug" title="Put your weed in here"></figure>
+      <figure><img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/lighter_bro.png" alt="A 'Lighter Bro' multi-tool"></figure>
+      <figure><img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/black_label.png" alt="Black Label cleaner"></figure>
 
       <p>Because we're connoisseurs like you, we will never send you a product that we wouldn't use ourselves or that we're not completely stoked on! From the OG toker to the new generation dabbers, we have something for everyone!</p>
 
@@ -77,34 +77,41 @@
 
       <h2>Pricing Options</h2>
 
+      <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/svg/guarantee.svg" alt="30 day money back guarantee">
+
       <span>Save on the best products that you'll receive automatically every month. Cancel at any time.</span>
 
-      <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/svg/guarantee.svg" alt="30 day money back guarantee">
 
       <ul>
 
         <li>
 
-          <h3></h3>
+          <h3>OG Hot Box</h3>
 
           <ul>
-            <li></li>
+            <li>5-8 Smoking Products</li>
+            <li>1-3 Smoking Products</li>
+            <li>Plan Renews Monthly</li>
+            <li>Free shipping!</li>
           </ul>
 
-          <span>$9.95/mo</span>
+          <span>$29.95/mo</span>
 
           <a href="order" class="button">Order now</a>
         </li>
 
         <li>
 
-          <h3></h3>
+          <h3>Top Shelf Box</h3>
 
           <ul>
-            <li></li>
+            <li>5-8 Smoking Products</li>
+            <li>1-3 Smoking Products</li>
+            <li>Plan Renews Monthly</li>
+            <li>Free shipping!</li>
           </ul>
 
-          <span>$9.95/mo</span>
+          <span>$79.95/mo</span>
 
           <a href="order" class="button">Order now</a>
         </li>
@@ -113,7 +120,7 @@
 
           <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/svg/gift_box.svg" alt="Gift box">
 
-          <h3>Order A <a class="button" href="gift_box">one time gift box</a></h3>
+          <h3>Order A</h3><a class="button" href="gift_box">one time gift box</a>
 
         </li>
 
@@ -157,6 +164,32 @@
 
       <span>Purchase items from previous boxes here!</span>
 
+      <?php
+
+      $products = array(
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+      );
+       ?>
+
+       <ul>
+
+       <?php foreach( $products as $product ): ?>
+
+         <li><img src="" /></li>
+
+       <?php endforeach; ?>
+
+       </ul>
+
     </div>
 
     <div id="contact">
@@ -178,7 +211,29 @@
 
     </div>
 
-    <div id="map"></div>
+    <div id="map">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d12120.172573328244!2d-122.35833552175293!3d40.58480309158952!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1452803325976" width="100%" height="200" frameborder="0" style="border:0" allowfullscreen></iframe>
+    </div>
 
   </main>
+
+  <script type="text/javascript">
+    jQuery(document).ready(function($) {
+
+      var pitchImagesWaypoint = $('.social').waypoint( function(direction) {
+        console.log(direction);
+        $('#pitch figure').each(function(index,element) {
+          console.log(element);
+          $(element).css('transform', 'scale(1.2)');
+          setTimeout(function(){
+            console.log(element);
+            $(element).css('transform','');
+          },500);
+        });
+      });
+
+      console.log(pitchImagesWaypoint);
+
+    });
+  </script>
 <?php get_footer(); ?>
