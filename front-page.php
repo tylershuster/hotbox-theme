@@ -221,12 +221,9 @@
     jQuery(document).ready(function($) {
 
       var pitchImagesWaypoint = $('.social').waypoint( function(direction) {
-        console.log(direction);
         $('#pitch figure').each(function(index,element) {
-          console.log(element);
           $(element).css('transform', 'scale(1.2)');
           setTimeout(function(){
-            console.log(element);
             $(element).css('transform','');
           },500);
         });
