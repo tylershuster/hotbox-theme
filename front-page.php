@@ -27,7 +27,16 @@
 
     </div>
 
-    <div class="cta parallax">
+    <style media="screen">
+      #cta1 {
+        overflow: hidden;
+        position: relative;
+      }
+    </style>
+
+    <div id="cta1" class="cta parallax">
+
+      <div class="bg-image" style="background-image: url('/wp-content/themes/hotbox/assets/img/calltoaction_bg.jpg');"> </div>
 
       <span>Are you a connoisseur?</span>
 
@@ -49,18 +58,23 @@
         <li><span>Your box of goodies will arrive at your doorstep in a discreet package!<br>Enjoy!</span></li>
       </ol>
 
+      <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/svg/box-mockup-01.svg" alt="" />
+
       <a href="join" class="button">Join</a>
       <a href="about" class="button">Learn More</a>
 
+
     </div>
 
-    <div class="testimonial parallax">
+    <div id="testimonial" class="testimonial parallax">
+
+      <div class="bg-image" style="background-image: url('/wp-content/themes/hotbox/assets/img/calltoaction_bg.jpg');"> </div>
 
       <h3>What our Customers are Saying</h3>
 
       <blockquote>
         <p>The Hot Box is awesome. They really know their products and plus they are right there in Northern California close to the Emerald Triangle!!!</p>
-        <cite>Chaz<img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/chaz.jpg" /></cite>
+        <cite>Chaz<img src="http://lorempixel.com/30/30/people" /></cite>
       </blockquote>
 
     </div>
@@ -128,7 +142,9 @@
 
     </div>
 
-    <div class="cta parallax">
+    <div id="cta2" class="cta parallax">
+
+      <div class="bg-image" style="background-image: url('/wp-content/themes/hotbox/assets/img/calltoaction_bg.jpg');"> </div>
 
       <span>Are you a connoisseur?</span>
 
@@ -144,13 +160,13 @@
 
       <h2>Previous Boxes</h2>
 
-      <span class="ribbon">See something you like from previous boxes?</span>
+      <span class="ribbon">See something you like<span class="hide"> from previous boxes</span>?</span>
 
       <span class="cta">Buy it now at our <a href="store" class="button">Online Store</a></span>
 
       <figure>
 
-        <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/box.jpg" alt="">
+        <img src="http://lorempixel.com/800/400/abstract" alt="">
 
         <figcaption>May</figcaption>
 
@@ -182,9 +198,9 @@
 
        <ul>
 
-       <?php foreach( $products as $product ): ?>
+       <?php foreach( $products as $i => $product ): ?>
 
-         <li><img src="" /></li>
+         <li><img src="http://lorempixel.com/400/400/abstract/<?php echo $i; ?>" /></li>
 
        <?php endforeach; ?>
 
@@ -217,19 +233,98 @@
 
   </main>
 
+  <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/debug.addIndicators.min.js"></script>
+  <script src="http://scrollmagic.io/js/lib/greensock/TweenMax.min.js"></script>
+  <script src="http://scrollmagic.io/scrollmagic/uncompressed/plugins/animation.gsap.js"></script>
+
   <script type="text/javascript">
+
+
+
     jQuery(document).ready(function($) {
 
-      var pitchImagesWaypoint = $('.social').waypoint( function(direction) {
-        $('#pitch figure').each(function(index,element) {
-          $(element).css('transform', 'scale(1.2)');
-          setTimeout(function(){
-            $(element).css('transform','');
-          },500);
-        });
+      $('#how li').addClass('hidden');
+
+      var controller = new ScrollMagic.Controller({
+        globalSceneOptions: {
+          duration: '200%',
+          triggerHook: "onEnter"
+        }
       });
 
-      console.log(pitchImagesWaypoint);
+      new ScrollMagic.Scene({
+        triggerElement: "#pitch",
+        offset: 300
+      })
+      .on( 'enter', function(event) {
+
+        $('#pitch figure').each(function(index,element) {
+
+          $(element).queue( 'flairQueue', function() {
+
+            setTimeout( function() {
+
+              $(element).css('transform', 'scale(1.2)');
+
+            }, index * 80 );
+
+            setTimeout( function() {
+
+              $(element).css('transform', '');
+
+            }, index * 80 + 300 );
+
+          });
+
+          $(element).dequeue('flairQueue');
+
+
+        });
+      })
+      .addTo(controller);
+
+      new ScrollMagic.Scene({
+        triggerElement: "#how",
+        offset: 300
+      })
+      .on( 'enter', function( event ) {
+
+        $('#how li').each( function( index, element ){
+
+          $(element).queue( 'enterQueue', function() {
+
+            setTimeout( function() {
+
+              $(element).removeClass('hidden');
+
+            }, index * 200 );
+
+          });
+
+          $(element).dequeue('enterQueue');
+
+        });
+      })
+      .addTo(controller);
+
+      new ScrollMagic.Scene({
+        triggerElement: '#cta1'
+      })
+      .setTween('#cta1 .bg-image', {y: "30%", ease: Linear.easeNone})
+      .addTo(controller);
+
+      new ScrollMagic.Scene({
+        triggerElement: '#cta2'
+      })
+      .setTween('#cta2 .bg-image', {y: "30%", ease: Linear.easeNone})
+      .addTo(controller);
+
+      new ScrollMagic.Scene({
+        triggerElement: '#testimonial'
+      })
+      .setTween('#testimonial .bg-image', {y: "30%", ease: Linear.easeNone})
+      .addTo(controller);
 
     });
   </script>
